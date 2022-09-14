@@ -1,3 +1,4 @@
+import { test, expect } from 'jest';
 import findDiff from '../src/findDiff.js';
 
 test('testing function genDiff()', () => {
