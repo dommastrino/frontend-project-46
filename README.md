@@ -34,4 +34,4 @@ make test
 
 Hexlet asciinema project 2
 
-![Alt text](asciinemas/gif1.gif) ![](gif1.gif)
+![Alt text](asciinemas/gif1.gif) / ![](gif1.gif) https://asciinema.org/a/PTzxoix3LJJD7KIyNPKHUPjNE
