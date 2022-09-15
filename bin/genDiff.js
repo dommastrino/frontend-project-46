@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+/* eslint-disable import/extensions */
+/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import { program } from 'commander';
@@ -9,9 +11,8 @@ const command = (files, format) => {
   if (format) {
     console.log('форматируем');
     return;
-  } else {
-    return findDiff(file1, file2);
   }
+  return findDiff(file1, file2);
 };
 program.version('1.0.0').description('Compares two configuration files and shows a difference.').option('-f, --format <type>', 'output format').argument('<filepath1> <filepath2>');
 program.parse(process.argv);

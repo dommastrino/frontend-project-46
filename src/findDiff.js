@@ -1,15 +1,12 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
-import * as fs from 'node:fs';
-import * as path from 'node:path';
 import _ from 'lodash';
+import parse from './parsers.js';
 
 const findDiff = (file1, file2) => {
-  const fileContent1 = fs.readFileSync(path.resolve(process.cwd(), file1).trim(), 'utf8');
-  const obj1 = JSON.parse(fileContent1);
+  const obj1 = parse(file1);
+  const obj2 = parse(file2);
   const keys1 = Object.keys(obj1);
-  const fileContent2 = fs.readFileSync(path.resolve(process.cwd(), file2).trim(), 'utf8');
-  const obj2 = JSON.parse(fileContent2);
   const keys2 = Object.keys(obj2);
   const sortedProps = _.sortBy(_.union(keys1, keys2));
   const result = sortedProps.map((prop) => {

@@ -35,3 +35,5 @@ make test
 Hexlet asciinema project 2
 
 ![Alt text](asciinemas/gif1.gif) / ![](gif1.gif) https://asciinema.org/a/PTzxoix3LJJD7KIyNPKHUPjNE
+
+![Alt text](asciinemas/gif2.gif) / ![](gif2.gif) https://asciinema.org/a/PUv9GvtX9dRSrZ1ki6qX6pfzM
