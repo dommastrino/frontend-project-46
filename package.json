@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "type": "module",
   "description": "[![Actions Status](https://github.com/dommastrino/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/dommastrino/frontend-project-46/actions)",
-  "main": "genDiff.js",
+  "main": "bin/genDiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dommastrino/frontend-project-46.git"
+  },
+  "bin": {
+    "genDiff": "bin/genDiff.js"
   },
   "author": "",
   "license": "ISC",

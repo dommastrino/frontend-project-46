@@ -28,4 +28,10 @@ npm link
 
 ### Запуск
 
+make test
+
 ### Демо
+
+Hexlet asciinema project 2
+
+https://asciinema.org/a/PTzxoix3LJJD7KIyNPKHUPjNE

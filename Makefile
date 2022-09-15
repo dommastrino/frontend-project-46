@@ -1,4 +1,3 @@
-
 install: install-deps
 	npx simple-git-hooks
 
@@ -7,6 +6,10 @@ run:
 
 install-deps:
 	npm ci
+
+publish:
+	npm publish --dry-run
+	npm link
 
 test:
 	npm test
@@ -21,3 +24,6 @@ publish:
 	npm publish
 
 .PHONY: test
+
+genDiff:
+	node bin/genDiff.js -h
