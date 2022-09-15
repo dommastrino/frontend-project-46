@@ -34,4 +34,4 @@ make test
 
 Hexlet asciinema project 2
 
-https://asciinema.org/a/PTzxoix3LJJD7KIyNPKHUPjNE
+![Alt text](asciinemas/evengif.gif) / ![](evengif.gif) https://asciinema.org/a/PTzxoix3LJJD7KIyNPKHUPjNE
