@@ -1,6 +1,6 @@
 ### Hexlet tests and linter status:
 
-[![Actions Status](https://github.com/dommastrino/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/dommastrino/frontend-project-46/actions) <a href="https://codeclimate.com/github/dommastrino/frontend-project-46/maintainability"><img src="https://api.codeclimate.com/v1/badges/bc058fcea75980819428/maintainability" /></a>
+[![Actions Status](https://github.com/dommastrino/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/dommastrino/frontend-project-46/actions) <a href="https://codeclimate.com/github/dommastrino/frontend-project-46/maintainability"><img src="https://api.codeclimate.com/v1/badges/bc058fcea75980819428/maintainability" /></a> <a href="https://codeclimate.com/github/dommastrino/frontend-project-46/test_coverage"><img src="https://api.codeclimate.com/v1/badges/bc058fcea75980819428/test_coverage" /></a>
 
 # Вычислитель отличий
 
