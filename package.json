@@ -5,7 +5,7 @@
   "description": "[![Actions Status](https://github.com/dommastrino/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/dommastrino/frontend-project-46/actions)",
   "main": "bin/genDiff.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "__tests__/genDiff.test.js"
   },
   "repository": {
     "type": "git",
