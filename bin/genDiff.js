@@ -6,15 +6,11 @@
 import { program } from 'commander';
 import findDiff from '../src/findDiff.js';
 
-const command = (files, format) => {
+const command = (files, format = 'stylish') => {
   const [file1, file2] = files;
-  if (format) {
-    console.log('форматируем');
-    return;
-  }
-  return findDiff(file1, file2);
+  return findDiff(file1, file2, format);
 };
-program.version('1.0.0').description('Compares two configuration files and shows a difference.').option('-f, --format <type>', 'output format').argument('<filepath1> <filepath2>');
+program.version('1.0.0').description('Compares two configuration files and shows a difference.').option('-f, --format <type>', 'output format', 'stylish').argument('<filepath1> <filepath2>');
 program.parse(process.argv);
 
 const { args } = program;

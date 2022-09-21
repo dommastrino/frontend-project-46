@@ -1,40 +1,42 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import _ from 'lodash';
-import parse from './parsers.js';
+import parsing from './parsers.js';
+import stylishFormatter from '../format/stylish.js';
 
-const findDiff = (file1, file2) => {
-  const obj1 = parse(file1);
-  const obj2 = parse(file2);
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
-  const sortedProps = _.sortBy(_.union(keys1, keys2));
+const diff = (obj1, obj2) => {
+  const props = _.union(_.keys(obj1), _.keys(obj2));
+  const sortedProps = _.sortBy(props);
   const result = sortedProps.map((prop) => {
     if (!_.has(obj1, prop)) {
-      return { type: '+', name: prop, value: obj2[prop] };
+      return { type: '+', prop, value: obj2[prop] };
     }
     if (!_.has(obj2, prop)) {
-      return { type: '-', name: prop, value: obj1[prop] };
+      return { type: '-', prop, value: obj1[prop] };
+    }
+    if (_.isPlainObject(obj1[prop]) && _.isPlainObject(obj2[prop])) {
+      return { type: 'obj', prop, child: diff(obj1[prop], obj2[prop]) };
     }
     if (!_.isEqual(obj1[prop], obj2[prop])) {
       return {
         type: 'diff',
-        name: prop,
-        file1Val: obj1[prop],
-        file2Val: obj2[prop],
+        prop,
+        file1value: obj1[prop],
+        file2value: obj2[prop],
       };
     }
-    return { type: ' ', name: prop, value: obj1[prop] };
+    return { type: 'ok', prop, value: obj1[prop] };
   });
-  console.log('{');
-  result.forEach((elem) => {
-    if (elem.type === 'diff') {
-      console.log(`- ${elem.name} ${elem.file1Val}`);
-      console.log(`+ ${elem.name} ${elem.file2Val}`);
-    } else console.log(`${elem.type} ${elem.name} ${elem.value}`);
-  });
-  console.log('}');
   return result;
+};
+
+const findDiff = (file1, file2) => {
+  const obj1 = parsing(file1);
+  const obj2 = parsing(file2);
+  const result = diff(obj1, obj2);
+  const some = stylishFormatter(result);
+  console.log(some);
+  return some;
 };
 
 export default findDiff;
