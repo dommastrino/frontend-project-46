@@ -2,9 +2,9 @@
 /* eslint-disable no-console */
 import _ from 'lodash';
 import parsing from './parsers.js';
-import stylishFormatter from '../format/stylish.js';
+import formatter from '../format/index.js';
 
-const diff = (obj1, obj2) => {
+export const diff = (obj1, obj2) => {
   const props = _.union(_.keys(obj1), _.keys(obj2));
   const sortedProps = _.sortBy(props);
   const result = sortedProps.map((prop) => {
@@ -30,13 +30,11 @@ const diff = (obj1, obj2) => {
   return result;
 };
 
-const findDiff = (file1, file2) => {
+export const findDiff = (file1, file2, format) => {
   const obj1 = parsing(file1);
   const obj2 = parsing(file2);
   const result = diff(obj1, obj2);
-  const some = stylishFormatter(result);
+  const some = formatter(result, format);
   console.log(some);
   return some;
 };
-
-export default findDiff;

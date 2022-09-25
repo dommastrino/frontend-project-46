@@ -1,35 +1,35 @@
 import _ from 'lodash';
 
-const pushSpaceToStr = (depth, initialValue = 4) => ' '.repeat(initialValue * depth - 2);
+const pushSpaceToStr = (counter, initialValue = 4) => ' '.repeat(initialValue * counter - 2);
 
-const toString = (data, depth) => {
+const toString = (data, counter) => {
   if (data === null) {
     return null;
   }
   if (_.isPlainObject(data) === false) {
     return `${data}`;
   }
-  const body = Object.entries(data).map(([key, value]) => `${pushSpaceToStr(depth + 1)}  ${key}: ${toString(value, depth + 1)}`);
-  return ['{', ...body, `${pushSpaceToStr(depth)}  }`].join('\n');
+  const body = Object.entries(data).map(([key, value]) => `${pushSpaceToStr(counter + 1)}  ${key}: ${toString(value, counter + 1)}`);
+  return ['{', ...body, `${pushSpaceToStr(counter)}  }`].join('\n');
 };
 
 const stylishFormatter = (output) => {
-  const recurse = (tree, counter) =>
-    tree.map((node) => {
-      if (node.type === 'obj') {
-        return `${pushSpaceToStr(counter)}  ${node.prop}: {\n${recurse(node.child, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
+  const recurse = (obj, counter) =>
+    obj.map((item) => {
+      if (item.type === 'obj') {
+        return `${pushSpaceToStr(counter)}  ${item.prop}: {\n${recurse(item.child, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
       }
-      if (node.type === 'diff') {
-        return `${pushSpaceToStr(counter)}- ${node.prop}: ${toString(node.file1value, counter)}\n${pushSpaceToStr(counter)}+ ${node.prop}: ${toString(node.file2value, counter)}`;
+      if (item.type === 'diff') {
+        return `${pushSpaceToStr(counter)}- ${item.prop}: ${toString(item.file1value, counter)}\n${pushSpaceToStr(counter)}+ ${item.prop}: ${toString(item.file2value, counter)}`;
       }
-      if (node.type === '+') {
-        return `${pushSpaceToStr(counter)}+ ${node.prop}: ${toString(node.value, counter)}`;
+      if (item.type === '+') {
+        return `${pushSpaceToStr(counter)}+ ${item.prop}: ${toString(item.value, counter)}`;
       }
-      if (node.type === '-') {
-        return `${pushSpaceToStr(counter)}- ${node.prop}: ${toString(node.value, counter)}`;
+      if (item.type === '-') {
+        return `${pushSpaceToStr(counter)}- ${item.prop}: ${toString(item.value, counter)}`;
       }
-      if (node.type === 'ok') {
-        return `${pushSpaceToStr(counter)}  ${node.prop}: ${toString(node.value, counter)}`;
+      if (item.type === 'ok') {
+        return `${pushSpaceToStr(counter)}  ${item.prop}: ${toString(item.value, counter)}`;
       }
     });
   return `{\n${recurse(output, 1).join('\n')}\n}`;

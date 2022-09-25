@@ -4,7 +4,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import { program } from 'commander';
-import findDiff from '../src/findDiff.js';
+import { findDiff } from '../src/findDiff.js';
 
 const command = (files, format = 'stylish') => {
   const [file1, file2] = files;
