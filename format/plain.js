@@ -18,7 +18,7 @@ const plainFormatter = (output) => {
     const result = obj.map((item) => {
       const prop = [...parent, item.prop].join('.');
       if (item.type === '+') {
-        return `Property '${prop}' was added with value: ${format(item.val)}`;
+        return `Property '${prop}' was added with value: ${format(item.value)}`;
       }
       if (item.type === '-') {
         return `Property '${prop}' was removed`;
