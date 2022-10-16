@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import _ from 'lodash';
 import parsing from './parsers.js';
-import formatter from '../format/index.js';
+import formatter from '../formatters/index.js';
 
 export const diff = (obj1, obj2) => {
   const props = _.union(_.keys(obj1), _.keys(obj2));
