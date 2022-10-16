@@ -43,3 +43,5 @@ Hexlet asciinema project 2
 ![Alt text](asciinemas/gif4.gif) / ![](gif4.gif) https://asciinema.org/a/ZD8flmZ4zpbsbvK5Coqml1ony
 
 ![Alt text](asciinemas/gif5.gif) / ![](gif5.gif) https://asciinema.org/a/36lrhTyzyILOT6L3zfeY712sw
+
+![Alt text](asciinemas/gif6.gif) / ![](gif6.gif) https://asciinema.org/a/0bToXjpBx3l0SkoBJlPF6dPpI

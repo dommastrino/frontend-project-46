@@ -8,6 +8,9 @@ const formatter = (output, format) => {
   if (format === 'plain') {
     return plainFormatter(output);
   }
+  if (format === 'json') {
+    return JSON.stringify(output);
+  }
 };
 
 export default formatter;
