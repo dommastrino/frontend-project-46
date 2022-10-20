@@ -2,8 +2,8 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "[![Actions Status](https://github.com/dommastrino/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/dommastrino/frontend-project-46/actions)",
-  "main": "bin/genDiff.js",
+  "description": "Вычислитель отличий – программа, определяющая разницу между двумя структурами данных.",
+  "main": "src/findDiff.js",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
   },
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/dommastrino/frontend-project-46.git"
   },
   "bin": {
-    "genDiff": "bin/genDiff.js"
+    "genDiff": "bin/gendiff.js"
   },
   "author": "",
   "license": "ISC",

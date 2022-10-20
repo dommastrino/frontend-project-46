@@ -6,7 +6,6 @@ const parsing = (file) => {
   let obj = {};
   const parsedPath = path.parse(file);
   const fileContent = fs.readFileSync(path.resolve(process.cwd(), file).trim(), 'utf8');
-
   if (parsedPath.ext === '.json') {
     obj = JSON.parse(fileContent);
   } else if (parsedPath.ext === '.yaml' || parsedPath.ext === '.yml') {

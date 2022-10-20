@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import _ from 'lodash';
 import parsing from './parsers.js';
-import formatter from '../formatters/index.js';
+import formatter from './formatters/index.js';
 
 export const diff = (obj1, obj2) => {
   const props = _.union(_.keys(obj1), _.keys(obj2));
@@ -30,7 +30,7 @@ export const diff = (obj1, obj2) => {
   return result;
 };
 
-export const findDiff = (file1, file2, format) => {
+export const findDiff = (file1, file2, format = 'stylish') => {
   const obj1 = parsing(file1);
   const obj2 = parsing(file2);
   const result = diff(obj1, obj2);

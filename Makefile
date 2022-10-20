@@ -26,4 +26,4 @@ publish:
 .PHONY: test
 
 genDiff:
-	node bin/genDiff.js -h
+	node bin/gendiff.js -h
