@@ -12,4 +12,4 @@ program
     const [file1, file2] = files;
     return findDiff(file1, file2, option.format);
   });
-program.parse(process.argv);
+program.parse();
