@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'url';
-import { findDiff } from '../src/findDiff.js';
+import findDiff from '../src/findDiff.js';
 
 const getPath = (filename) => path.resolve(path.dirname(fileURLToPath(import.meta.url)), './..', '__fixtures__', filename);
 describe('genDiff module', () => {
