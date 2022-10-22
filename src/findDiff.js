@@ -30,7 +30,7 @@ export const diff = (obj1, obj2) => {
   return result;
 };
 
-export const findDiff = (file1, file2, format = 'stylish') => {
+const findDiff = (file1, file2, format = 'stylish') => {
   const obj1 = parsing(file1);
   const obj2 = parsing(file2);
   const result = diff(obj1, obj2);
@@ -38,3 +38,5 @@ export const findDiff = (file1, file2, format = 'stylish') => {
   console.log(some);
   return some;
 };
+
+export default findDiff;
