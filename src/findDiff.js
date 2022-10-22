@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import _ from 'lodash';
