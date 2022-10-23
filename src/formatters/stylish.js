@@ -14,24 +14,22 @@ const toString = (data, counter) => {
 };
 
 const stylishFormatter = (output) => {
-  const recurse = (obj, counter) =>
-    obj.map((item) => {
-      if (item.type === 'obj') {
+  const recurse = (obj, counter) => obj.map((item) => {
+    switch (item.type) {
+      case 'obj':
         return `${pushSpaceToStr(counter)}  ${item.prop}: {\n${recurse(item.child, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
-      }
-      if (item.type === 'diff') {
+      case 'diff':
         return `${pushSpaceToStr(counter)}- ${item.prop}: ${toString(item.file1value, counter)}\n${pushSpaceToStr(counter)}+ ${item.prop}: ${toString(item.file2value, counter)}`;
-      }
-      if (item.type === '+') {
+      case '+':
         return `${pushSpaceToStr(counter)}+ ${item.prop}: ${toString(item.value, counter)}`;
-      }
-      if (item.type === '-') {
+      case '-':
         return `${pushSpaceToStr(counter)}- ${item.prop}: ${toString(item.value, counter)}`;
-      }
-      if (item.type === 'ok') {
+      case 'ok':
         return `${pushSpaceToStr(counter)}  ${item.prop}: ${toString(item.value, counter)}`;
-      }
-    });
+      default:
+        throw new Error('Невозможно обработать тип элемента');
+    }
+  });
   return `{\n${recurse(output, 1).join('\n')}\n}`;
 };
 
