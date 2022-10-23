@@ -17,20 +17,19 @@ const plainFormatter = (output) => {
   const recurse = (obj, parent) => {
     const result = obj.map((item) => {
       const prop = [...parent, item.prop].join('.');
-      if (item.type === '+') {
-        return `Property '${prop}' was added with value: ${format(item.value)}`;
-      }
-      if (item.type === '-') {
-        return `Property '${prop}' was removed`;
-      }
-      if (item.type === 'diff') {
-        return `Property '${prop}' was updated. From ${format(item.file1value)} to ${format(item.file2value)}`;
-      }
-      if (item.type === 'obj') {
-        return `${recurse(item.child, [prop])}`;
-      }
-      if (item.type === 'ok') {
-        return null;
+      switch (item.type) {
+        case '+':
+          return `Property '${prop}' was added with value: ${format(item.value)}`;
+        case '-':
+          return `Property '${prop}' was removed`;
+        case 'diff':
+          return `Property '${prop}' was updated. From ${format(item.file1value)} to ${format(item.file2value)}`;
+        case 'obj':
+          return `${recurse(item.child, [prop])}`;
+        case 'ok':
+          return null;
+        default:
+          throw new Error('Невозможно обработать тип элемента');
       }
     });
     return _.compact(result).join('\n');
