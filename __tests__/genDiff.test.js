@@ -1,5 +1,5 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import findDiff from '../src/findDiff.js';
 
@@ -15,6 +15,7 @@ describe('genDiff module', () => {
     expect(findDiff(getPath('data1.json'), getPath('data2.json'), 'plain')).toEqual(plainData);
     expect(findDiff(getPath('data1.json'), getPath('data2.json'), 'json')).toEqual(jsonData);
   });
+  
   it('should be work with ymal', () => {
     expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'))).toEqual(stylishData);
     expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'), 'stylish')).toEqual(stylishData);
