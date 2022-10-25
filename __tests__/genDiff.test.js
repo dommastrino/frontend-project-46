@@ -3,7 +3,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import findDiff from '../src/findDiff.js';
 
-const getPath = (filename) => path.resolve(path.dirname(fileURLToPath(import.meta.url)), './..', '__fixtures__', filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const getPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+
 const stylishData = fs.readFileSync(path.resolve(process.cwd(), getPath('resultStylish.txt')), 'utf-8');
 const plainData = fs.readFileSync(path.resolve(process.cwd(), getPath('resultPlain.txt')), 'utf-8');
 const jsonData = fs.readFileSync(path.resolve(process.cwd(), getPath('resultJson.txt')), 'utf-8');
@@ -15,7 +19,7 @@ describe('genDiff module', () => {
     expect(findDiff(getPath('data1.json'), getPath('data2.json'), 'plain')).toEqual(plainData);
     expect(findDiff(getPath('data1.json'), getPath('data2.json'), 'json')).toEqual(jsonData);
   });
-  
+
   it('should be work with ymal', () => {
     expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'))).toEqual(stylishData);
     expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'), 'stylish')).toEqual(stylishData);
