@@ -34,20 +34,20 @@ make test
 
 Hexlet asciinema project 2 comparison of JSON files
 
-![Alt text](asciinemas/gif1.gif) / ![](gif1.gif)
+![Alt text](asciinemas/gif1.gif) ![](gif1.gif)
 
 Hexlet asciinema project 2 comparison of yaml files
 
-![Alt text](asciinemas/gif2.gif) / ![](gif2.gif)
+![Alt text](asciinemas/gif2.gif) ![](gif2.gif)
 
 Hexlet asciinema project 2 recursive comparison of files
 
-![Alt text](asciinemas/gif3.gif) / ![](gif3.gif)
+![Alt text](asciinemas/gif3.gif) ![](gif3.gif)
 
 Hexlet asciinema project 2 plain format
 
-![Alt text](asciinemas/gif5.gif) / ![](gif5.gif)
+![Alt text](asciinemas/gif5.gif) ![](gif5.gif)
 
 Hexlet asciinema project 2 json format
 
-![Alt text](asciinemas/gif6.gif) / ![](gif6.gif)
+![Alt text](asciinemas/gif6.gif) ![](gif6.gif)
