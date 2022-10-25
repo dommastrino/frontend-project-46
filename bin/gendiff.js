@@ -9,7 +9,5 @@ program
   .option('-f, --format <type>', 'output format', 'stylish')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .action((filepath1, filepath2) => {
-    return findDiff(filepath1, filepath2, program.opts().format);
-  });
+  .action((filepath1, filepath2) => findDiff(filepath1, filepath2, program.opts().format));
 program.parse();
