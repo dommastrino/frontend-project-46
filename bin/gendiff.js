@@ -7,9 +7,9 @@ program
   .version('1.0.0')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format <type>', 'output format', 'stylish')
-  .argument('<filepath1...>')
-  .action((files, option) => {
-    const [file1, file2] = files;
-    return findDiff(file1, file2, option.format);
+  .argument('<filepath1>')
+  .argument('<filepath2>')
+  .action((filepath1, filepath2) => {
+    return findDiff(filepath1, filepath2, program.opts().format);
   });
 program.parse();
