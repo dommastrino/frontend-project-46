@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const build = (obj1, obj2) => {
-const keys = _.union(_.keys(obj1), _.keys(obj2));
+  const keys = _.union(_.keys(obj1), _.keys(obj2));
   const sortedProps = _.sortBy(keys);
   const result = sortedProps.map((key) => {
     if (!_.has(obj1, key)) {
