@@ -17,15 +17,15 @@ const stylishFormatter = (output) => {
   const recurse = (obj, counter) => obj.map((item) => {
     switch (item.type) {
       case 'obj':
-        return `${pushSpaceToStr(counter)}  ${item.prop}: {\n${recurse(item.child, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
+        return `${pushSpaceToStr(counter)}  ${item.key}: {\n${recurse(item.child, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
       case 'diff':
-        return `${pushSpaceToStr(counter)}- ${item.prop}: ${toString(item.file1value, counter)}\n${pushSpaceToStr(counter)}+ ${item.prop}: ${toString(item.file2value, counter)}`;
+        return `${pushSpaceToStr(counter)}- ${item.key}: ${toString(item.file1value, counter)}\n${pushSpaceToStr(counter)}+ ${item.key}: ${toString(item.file2value, counter)}`;
       case '+':
-        return `${pushSpaceToStr(counter)}+ ${item.prop}: ${toString(item.value, counter)}`;
+        return `${pushSpaceToStr(counter)}+ ${item.key}: ${toString(item.value, counter)}`;
       case '-':
-        return `${pushSpaceToStr(counter)}- ${item.prop}: ${toString(item.value, counter)}`;
+        return `${pushSpaceToStr(counter)}- ${item.key}: ${toString(item.value, counter)}`;
       case 'ok':
-        return `${pushSpaceToStr(counter)}  ${item.prop}: ${toString(item.value, counter)}`;
+        return `${pushSpaceToStr(counter)}  ${item.key}: ${toString(item.value, counter)}`;
       default:
         throw new Error('Невозможно обработать тип элемента');
     }

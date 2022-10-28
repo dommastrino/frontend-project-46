@@ -1,29 +1,42 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import findDiff from '../src/findDiff.js';
+import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const getPath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
+const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-const stylishData = fs.readFileSync(path.resolve(process.cwd(), getPath('resultStylish.txt')), 'utf-8');
-const plainData = fs.readFileSync(path.resolve(process.cwd(), getPath('resultPlain.txt')), 'utf-8');
-const jsonData = fs.readFileSync(path.resolve(process.cwd(), getPath('resultJson.txt')), 'utf-8');
+const readFixtureData = (fileName) => fs.readFileSync(getFixturePath(fileName), 'utf-8');
 
-describe('genDiff module', () => {
-  it('should be work with json', () => {
-    expect(findDiff(getPath('data1.json'), getPath('data2.json'))).toEqual(stylishData);
-    expect(findDiff(getPath('data1.json'), getPath('data2.json'), 'stylish')).toEqual(stylishData);
-    expect(findDiff(getPath('data1.json'), getPath('data2.json'), 'plain')).toEqual(plainData);
-    expect(findDiff(getPath('data1.json'), getPath('data2.json'), 'json')).toEqual(jsonData);
-  });
+const stylishData = readFixtureData('resultStylish.txt');
+const plainData = readFixtureData('resultPlain.txt');
+const jsonData = readFixtureData('resultJson.txt');
+const jsonFilePath1 = getFixturePath('data1.json');
+const jsonFilePath2 = getFixturePath('data2.json');
+const ymlFilePath1 = getFixturePath('data1.yml');
+const ymlFilePath2 = getFixturePath('data2.yaml');
 
-  it('should be work with ymal', () => {
-    expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'))).toEqual(stylishData);
-    expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'), 'stylish')).toEqual(stylishData);
-    expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'), 'plain')).toEqual(plainData);
-    expect(findDiff(getPath('data1.yml'), getPath('data2.yaml'), 'json')).toEqual(jsonData);
-  });
+test.each([
+  [jsonFilePath1, jsonFilePath2, 'stylish', stylishData],
+  [jsonFilePath1, jsonFilePath2, 'plain', plainData],
+  [jsonFilePath1, jsonFilePath2, 'json', jsonData],
+])('should be work with json', (filePath1, filePath2, format, expected) => {
+  expect(genDiff(filePath1, filePath2, format)).toBe(expected);
+});
+
+test.each([
+  [ymlFilePath1, ymlFilePath2, 'stylish', stylishData],
+  [ymlFilePath1, ymlFilePath2, 'plain', plainData],
+  [ymlFilePath1, ymlFilePath2, 'json', jsonData],
+])('should be work with yaml', (filePath1, filePath2, format, expected) => {
+  expect(genDiff(filePath1, filePath2, format)).toBe(expected);
+});
+
+test.each([
+  [jsonFilePath1, jsonFilePath2, stylishData],
+  [ymlFilePath1, ymlFilePath2, stylishData],
+])('should be work with empty format', (filePath1, filePath2, expected) => {
+  expect(genDiff(filePath1, filePath2)).toBe(expected);
 });

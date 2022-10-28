@@ -16,16 +16,16 @@ const format = (val) => {
 const plainFormatter = (output) => {
   const recurse = (obj, parent) => {
     const result = obj.map((item) => {
-      const prop = [...parent, item.prop].join('.');
+      const key = [...parent, item.key].join('.');
       switch (item.type) {
         case '+':
-          return `Property '${prop}' was added with value: ${format(item.value)}`;
+          return `Property '${key}' was added with value: ${format(item.value)}`;
         case '-':
-          return `Property '${prop}' was removed`;
+          return `Property '${key}' was removed`;
         case 'diff':
-          return `Property '${prop}' was updated. From ${format(item.file1value)} to ${format(item.file2value)}`;
+          return `Property '${key}' was updated. From ${format(item.file1value)} to ${format(item.file2value)}`;
         case 'obj':
-          return `${recurse(item.child, [prop])}`;
+          return `${recurse(item.child, [key])}`;
         case 'ok':
           return null;
         default:
