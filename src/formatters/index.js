@@ -1,8 +1,8 @@
 import stylishFormatter from './stylish.js';
 import plainFormatter from './plain.js';
 
-const format = (output, format) => {
-  switch (format) {
+const format = (output, outputFormat) => {
+  switch (outputFormat) {
     case 'stylish':
       return stylishFormatter(output);
     case 'plain':

@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
+import * as path from 'path';
+import * as fs from 'fs';
 import parsing from './parsers.js';
 import format from './formatters/index.js';
 import build from './build.js';
-import * as path from 'node:path';
-import * as fs from 'node:fs';
 
 const genDiff = (file1, file2, outputFormat = 'stylish') => {
   const extension1 = path.parse(file1).ext;
