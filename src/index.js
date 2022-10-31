@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import format from './formatters/index.js';
 import buildTree from './treeBuilder.js';
-import { getData } from './utils.js';
+import getData from './utils.js';
 
 export default (file1, file2, outputFormat = 'stylish') => {
   const data1 = getData(file1);

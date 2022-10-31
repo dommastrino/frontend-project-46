@@ -1,8 +1,8 @@
 import _ from 'lodash';
-//здесь меняла obj1 и obj2 на data1 и data2
-const buildTree = (data1, data2) => {//переименовала на buildTree, нажала обновить импорты
+
+const buildTree = (data1, data2) => { 
   const keys = _.union(_.keys(data1), _.keys(data2));
-  const sortedKeys = _.sortBy(keys);//здесь и ниже заменила на sortedKeys
+  const sortedKeys = _.sortBy(keys);
   const result = sortedKeys.map((key) => {
     if (!_.has(data1, key)) {
       return { type: '+', key, value: data2[key] };
