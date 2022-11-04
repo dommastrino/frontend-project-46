@@ -16,18 +16,18 @@ const toString = (data, counter) => {
 const stylishFormatter = (output) => {
   const recurse = (obj, counter) => obj.map((item) => {
     switch (item.type) {
-      case 'obj':
-        return `${pushSpaceToStr(counter)}  ${item.key}: {\n${recurse(item.child, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
-      case 'diff':
+      case 'nested':
+        return `${pushSpaceToStr(counter)}  ${item.key}: {\n${recurse(item.children, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
+      case 'changed':
         return `${pushSpaceToStr(counter)}- ${item.key}: ${toString(item.file1value, counter)}\n${pushSpaceToStr(counter)}+ ${item.key}: ${toString(item.file2value, counter)}`;
-      case '+':
+      case 'added':
         return `${pushSpaceToStr(counter)}+ ${item.key}: ${toString(item.value, counter)}`;
-      case '-':
+      case 'deleted':
         return `${pushSpaceToStr(counter)}- ${item.key}: ${toString(item.value, counter)}`;
-      case 'ok':
+      case 'unchanged':
         return `${pushSpaceToStr(counter)}  ${item.key}: ${toString(item.value, counter)}`;
       default:
-        throw new Error('Невозможно обработать тип элемента');
+        throw new Error('Cannot handle element type');
     }
   });
   return `{\n${recurse(output, 1).join('\n')}\n}`;

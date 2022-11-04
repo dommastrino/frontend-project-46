@@ -16,7 +16,6 @@ const expectedJSON = readFixture('resultJson.txt');
 
 const testList = ['json', 'yaml'];
 
-// уникальное название для блока тестов
 describe('genDiff', () => {
   test.each(testList)('should be work with %s format', (format) => {
     const filePath1 = getFixturePath(`data1.${format}`);

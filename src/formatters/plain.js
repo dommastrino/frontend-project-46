@@ -18,18 +18,18 @@ const plainFormatter = (output) => {
     const result = obj.map((item) => {
       const key = [...parent, item.key].join('.');
       switch (item.type) {
-        case '+':
+        case 'added':
           return `Property '${key}' was added with value: ${format(item.value)}`;
-        case '-':
+        case 'deleted':
           return `Property '${key}' was removed`;
-        case 'diff':
+        case 'changed':
           return `Property '${key}' was updated. From ${format(item.file1value)} to ${format(item.file2value)}`;
-        case 'obj':
-          return `${recurse(item.child, [key])}`;
-        case 'ok':
+        case 'nested':
+          return `${recurse(item.children, [key])}`;
+        case 'unchanged':
           return null;
         default:
-          throw new Error('Невозможно обработать тип элемента');
+          throw new Error('Cannot handle element type');
       }
     });
     return _.compact(result).join('\n');

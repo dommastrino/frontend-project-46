@@ -1,11 +1,19 @@
-#!/usr/bin/env node
+import path from 'path';
+import fs from 'fs';
+import parse from './parsers.js';
 import format from './formatters/index.js';
 import buildTree from './treeBuilder.js';
-import getData from './utils.js';
 
-export default (file1, file2, outputFormat = 'stylish') => {
-  const data1 = getData(file1);
-  const data2 = getData(file2);
+const extractFormat = (filePath) => path.parse(filePath).ext.slice(1);
+
+const buildFullPath = (filePath) => fs.readFileSync(filePath, 'utf8');
+
+const getData = (file) => parse(buildFullPath(path.resolve(process.cwd(), file)), extractFormat(file));
+
+export default (filePath1, filePath2, outputFormat = 'stylish') => {
+  const data1 = getData(filePath1);
+  const data2 = getData(filePath2);
   const tree = buildTree(data1, data2);
   return format(tree, outputFormat);
 };
+
