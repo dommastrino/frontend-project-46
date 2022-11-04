@@ -8,7 +8,8 @@ const extractFormat = (filePath) => path.parse(filePath).ext.slice(1);
 
 const buildFullPath = (filePath) => fs.readFileSync(filePath, 'utf8');
 
-const getData = (file) => parse(buildFullPath(path.resolve(process.cwd(), file)), extractFormat(file));
+const getData = (file) => 
+parse(buildFullPath(path.resolve(process.cwd(), file)), extractFormat(file));
 
 export default (filePath1, filePath2, outputFormat = 'stylish') => {
   const data1 = getData(filePath1);
@@ -16,4 +17,3 @@ export default (filePath1, filePath2, outputFormat = 'stylish') => {
   const tree = buildTree(data1, data2);
   return format(tree, outputFormat);
 };
-
