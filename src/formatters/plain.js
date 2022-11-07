@@ -13,7 +13,7 @@ const format = (val) => {
   return null;
 };
 
-const plainFormatter = (output) => {
+const formatPlain = (output) => {
   const recurse = (obj, parent) => {
     const result = obj.map((item) => {
       const key = [...parent, item.key].join('.');
@@ -23,7 +23,7 @@ const plainFormatter = (output) => {
         case 'deleted':
           return `Property '${key}' was removed`;
         case 'changed':
-          return `Property '${key}' was updated. From ${format(item.file1value)} to ${format(item.file2value)}`;
+          return `Property '${key}' was updated. From ${format(item.value1)} to ${format(item.value2)}`;
         case 'nested':
           return `${recurse(item.children, [key])}`;
         case 'unchanged':
@@ -37,4 +37,4 @@ const plainFormatter = (output) => {
   return recurse(output, []);
 };
 
-export default plainFormatter;
+export default formatPlain;

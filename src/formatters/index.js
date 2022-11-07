@@ -1,16 +1,16 @@
-import stylishFormatter from './stylish.js';
-import plainFormatter from './plain.js';
+import formatStylish from './stylish.js';
+import formatPlain from './plain.js';
 
-const format = (output, outputFormat) => {
+const format = (tree, outputFormat) => {
   switch (outputFormat) {
     case 'stylish':
-      return stylishFormatter(output);
+      return formatStylish(tree);
     case 'plain':
-      return plainFormatter(output);
+      return formatPlain(tree);
     case 'json':
-      return JSON.stringify(output);
+      return JSON.stringify(tree);
     default:
-      throw new Error(`Неподдерживаемый тип данных ${output}`);
+      throw new Error(`Неподдерживаемый тип данных ${tree}`);
   }
 };
 

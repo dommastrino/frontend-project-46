@@ -1,36 +1,33 @@
 import _ from 'lodash';
 
-const pushSpaceToStr = (counter, initialValue = 4) => ' '.repeat(initialValue * counter - 2);
+const indent = (depth, spaceCount = 4) => ' '.repeat(spaceCount * depth - 2);
 
-const toString = (data, counter) => {
-  if (data === null) {
-    return null;
+const stringify = (data, depth) => {
+  if (_.isObject(data) === false) {
+    return String(data);
   }
-  if (_.isPlainObject(data) === false) {
-    return `${data}`;
-  }
-  const body = Object.entries(data).map(([key, value]) => `${pushSpaceToStr(counter + 1)}  ${key}: ${toString(value, counter + 1)}`);
-  return ['{', ...body, `${pushSpaceToStr(counter)}  }`].join('\n');
+  const body = Object.entries(data).map(([key, value]) => `${indent(depth + 1)}  ${key}: ${stringify(value, depth + 1)}`);
+  return ['{', ...body, `${indent(depth)}  }`].join('\n');
 };
 
-const stylishFormatter = (output) => {
-  const recurse = (obj, counter) => obj.map((item) => {
+const formatStylish = (tree) => {
+  const recurse = (node, depth) => node.map((item) => {
     switch (item.type) {
       case 'nested':
-        return `${pushSpaceToStr(counter)}  ${item.key}: {\n${recurse(item.children, counter + 1).join('\n')}\n${pushSpaceToStr(counter)}  }`;
+        return `${indent(depth)}  ${item.key}: {\n${recurse(item.children, depth + 1).join('\n')}\n${indent(depth)}  }`;
       case 'changed':
-        return `${pushSpaceToStr(counter)}- ${item.key}: ${toString(item.file1value, counter)}\n${pushSpaceToStr(counter)}+ ${item.key}: ${toString(item.file2value, counter)}`;
+        return `${indent(depth)}- ${item.key}: ${stringify(item.value1, depth)}\n${indent(depth)}+ ${item.key}: ${stringify(item.value2, depth)}`;
       case 'added':
-        return `${pushSpaceToStr(counter)}+ ${item.key}: ${toString(item.value, counter)}`;
+        return `${indent(depth)}+ ${item.key}: ${stringify(item.value, depth)}`;
       case 'deleted':
-        return `${pushSpaceToStr(counter)}- ${item.key}: ${toString(item.value, counter)}`;
+        return `${indent(depth)}- ${item.key}: ${stringify(item.value, depth)}`;
       case 'unchanged':
-        return `${pushSpaceToStr(counter)}  ${item.key}: ${toString(item.value, counter)}`;
+        return `${indent(depth)}  ${item.key}: ${stringify(item.value, depth)}`;
       default:
         throw new Error('Cannot handle element type');
     }
   });
-  return `{\n${recurse(output, 1).join('\n')}\n}`;
+  return `{\n${recurse(tree, 1).join('\n')}\n}`;
 };
 
-export default stylishFormatter;
+export default formatStylish;

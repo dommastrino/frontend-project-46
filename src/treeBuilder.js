@@ -17,8 +17,8 @@ const buildTree = (data1, data2) => {
       return {
         type: 'changed',
         key,
-        file1value: data1[key],
-        file2value: data2[key],
+        value1: data1[key],
+        value2: data2[key],
       };
     }
     return { type: 'unchanged', key, value: data1[key] };
