@@ -18,8 +18,8 @@ const testList = ['json', 'yaml'];
 
 describe('genDiff', () => {
   test.each(testList)('should be work with %s format', (format) => {
-    const filePath1 = `__fixtures__/data1.${format}`;
-    const filePath2 = `__fixtures__/data2.${format}`;
+    const filePath1 = getFixturePath(`data1.${format}`);
+    const filePath2 = getFixturePath(`data2.${format}`);
     expect(genDiff(filePath1, filePath2)).toBe(expectedStylish);
     expect(genDiff(filePath1, filePath2, 'stylish')).toBe(expectedStylish);
     expect(genDiff(filePath1, filePath2, 'plain')).toBe(expectedPlain);

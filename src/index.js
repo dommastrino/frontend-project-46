@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const extractFormat = (filePath) => path.parse(filePath).ext.slice(1);
 
-const buildFullPath = (filePath) => path.join(__dirname, '..', filePath);
+const buildFullPath = (filePath) => path.resolve(process.cwd(), filePath);
 
 const getData = (filePath) => parse(fs.readFileSync(filePath,'utf8'), extractFormat(filePath));
 
