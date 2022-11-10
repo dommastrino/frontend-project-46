@@ -7,7 +7,7 @@ const stringify = (data) => {
   if (typeof data === 'string') {
     return `'${data}'`;
   }
-  return data;
+  return String(data);
 };
 
 const formatPlain = (output) => {
