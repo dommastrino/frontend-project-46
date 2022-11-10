@@ -1,40 +1,37 @@
 import _ from 'lodash';
 
-const format = (val) => {
-  if (_.isPlainObject(val) === true) {
+const stringify = (data) => {
+  if (_.isPlainObject(data) === true) {
     return '[complex value]';
   }
-  if (typeof val === 'string') {
-    return `'${val}'`;
+  if (typeof data === 'string') {
+    return `'${data}'`;
   }
-  if (val === true || val === false || typeof val === 'number') {
-    return `${val}`;
-  }
-  return null;
+  return data;
 };
 
 const formatPlain = (output) => {
-  const recurse = (obj, parent) => {
+  const iter = (obj, parent) => {
     const result = obj.map((item) => {
       const key = [...parent, item.key].join('.');
       switch (item.type) {
         case 'added':
-          return `Property '${key}' was added with value: ${format(item.value)}`;
+          return `Property '${key}' was added with value: ${stringify(item.value)}`;
         case 'deleted':
           return `Property '${key}' was removed`;
         case 'changed':
-          return `Property '${key}' was updated. From ${format(item.value1)} to ${format(item.value2)}`;
+          return `Property '${key}' was updated. From ${stringify(item.value1)} to ${stringify(item.value2)}`;
         case 'nested':
-          return `${recurse(item.children, [key])}`;
+          return `${iter(item.children, [key])}`;
         case 'unchanged':
           return null;
         default:
-          throw new Error('Cannot handle element type');
+          throw new Error(`Cannot handle element type ${item.type}`);
       }
     });
     return _.compact(result).join('\n');
   };
-  return recurse(output, []);
+  return iter(output, []);
 };
 
 export default formatPlain;

@@ -10,7 +10,7 @@ const format = (tree, outputFormat) => {
     case 'json':
       return JSON.stringify(tree);
     default:
-      throw new Error(`Неподдерживаемый тип данных ${tree}`);
+      throw new Error(`Unsupported data type "${tree}"`);
   }
 };
 
